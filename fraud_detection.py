@@ -68,7 +68,8 @@ def basic_preprocessing(train_df, test_df):
         # 數值標準化
         scaler = StandardScaler()
         all_data['scaled_distance'] = scaler.fit_transform(all_data[['distance']])
-        all_data['scaled_amount'] = scaler.fit_transform(all_data[['att4']])
+        all_data['scaled_amount'] = scaler.fit_transform(all_data[['att4']])  # 交易金額標準化
+        all_data['scaled_age'] = scaler.fit_transform(all_data[['att5']])  # 年齡標準化
         
         # 類別特徵編碼
         le = LabelEncoder()
@@ -99,9 +100,9 @@ def train_simple_model(train_data, test_data):
         
         model = lgb.LGBMClassifier(
             objective='binary',
-            n_estimators=500,
-            learning_rate=0.05,
-            max_depth=7,
+            n_estimators=1000,
+            learning_rate=0.01,
+            max_depth=15,
             num_leaves=31,
             random_state=42
         )
@@ -110,7 +111,7 @@ def train_simple_model(train_data, test_data):
             X_train, y_train,
             eval_set=[(X_val, y_val)],
             eval_metric='auc',
-            callbacks=[early_stopping(stopping_rounds=50)]
+            callbacks=[early_stopping(stopping_rounds=80)]
         )
         
         test_features = test_data[features]
