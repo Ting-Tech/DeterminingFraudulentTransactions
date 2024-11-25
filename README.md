@@ -2,6 +2,19 @@
 
 # Data Science HW1 - 信用卡詐騙偵測系統
 
+## 環境要求
+
+- **Python 版本**: 
+- 3.6 或更高版本
+- **必要的 Python 套件**：  
+- `pandas`  
+  
+- `numpy`
+  
+-   `scikit-learn`
+  
+- `lightgbm`
+
 ## 如何執行程式
 
 1. **安裝所需的Python套件：**
